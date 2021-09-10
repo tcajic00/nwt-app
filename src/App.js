@@ -25,6 +25,10 @@ const App = () => {
     setVehicles([...vehicles, vehicle]);
   };
 
+  const deleteVehicle = (id) => {
+    setVehicles(vehicles.filter((vehicle) => vehicle.id !== id));
+  };
+
   return (
     <div className="container">
       <h1>Car repair queue</h1>
@@ -35,7 +39,7 @@ const App = () => {
         </div>
         <div className="flex-large" id="title-2">
           <h2>Vehicle queue</h2>
-          <CarTable vehicles={vehicles} />
+          <CarTable vehicles={vehicles} deleteVehicle={deleteVehicle} />
         </div>
       </div>
     </div>

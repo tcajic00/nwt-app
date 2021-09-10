@@ -30,7 +30,10 @@ const CarTable = (props) => (
               <IconButton color="primary">
                 <EditIcon />
               </IconButton>
-              <IconButton color="secondary">
+              <IconButton
+                color="secondary"
+                onClick={() => props.deleteVehicle(vehicle.id)}
+              >
                 <DeleteIcon />
               </IconButton>
             </td>
