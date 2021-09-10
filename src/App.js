@@ -31,13 +31,13 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1>Car repair queue</h1>
+      <h1>Auto repair shop</h1>
       <div className="flex-row">
         <div className="flex-large">
           <h2>Add vehicle</h2>
           <AddVehicleForm addVehicle={addVehicle} />
         </div>
-        <div className="flex-large" id="title-2">
+        <div className="flex-large">
           <h2>Vehicle queue</h2>
           <CarTable vehicles={vehicles} deleteVehicle={deleteVehicle} />
         </div>
