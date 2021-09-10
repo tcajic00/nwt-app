@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import CarTable from "./components/CarTable";
+import AddVehicleForm from "./components/AddVehicleForm";
+
+import "./App.css";
+
+const App = () => {
+  const vehiclesData = [
+    { id: 1, maker: "Ford", model: "Focus", year: "2010", owner: "Ante Antic" },
+    { id: 2, maker: "Opel", model: "Corsa", year: "2011", owner: "Ivo Ivic" },
+    {
+      id: 3,
+      maker: "Ford",
+      model: "Manta",
+      year: "1978",
+      owner: "Marko Markic",
+    },
+  ];
+
+  const [vehicles, setVehicles] = useState(vehiclesData);
+
+  const addVehicle = (vehicle) => {
+    vehicle.id = vehicles.length + 1;
+    setVehicles([...vehicles, vehicle]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Car repair queue</h1>
+      <div className="flex-row">
+        <div className="flex-large">
+          <h2>Add vehicle</h2>
+          <AddVehicleForm addVehicle={addVehicle} />
+        </div>
+        <div className="flex-large" id="title-2">
+          <h2>Vehicle queue</h2>
+          <CarTable vehicles={vehicles} />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
