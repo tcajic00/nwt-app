@@ -29,7 +29,12 @@ const CarTable = (props) => (
             <td>{vehicle.owner}</td>
             <td>{vehicle.malfunction}</td>
             <td id="actions">
-              <IconButton color="primary">
+              <IconButton
+                color="primary"
+                onClick={() => {
+                  props.editVehicle(vehicle);
+                }}
+              >
                 <EditIcon />
               </IconButton>
               <IconButton

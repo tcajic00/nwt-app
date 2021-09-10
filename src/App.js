@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import CarTable from "./components/CarTable";
 import AddVehicleForm from "./components/AddVehicleForm";
+import EditVehicleForm from "./components/EditVehicleForm";
 
 import "./App.css";
 
@@ -35,6 +36,40 @@ const App = () => {
 
   const [vehicles, setVehicles] = useState(vehiclesData);
 
+  const [editing, setEditing] = useState(false);
+
+  const initialFormState = {
+    id: null,
+    maker: "",
+    model: "",
+    year: "",
+    owner: "",
+    malfunction: "",
+  };
+
+  const [currentVehicle, setCurrentVehicle] = useState(initialFormState);
+
+  const editVehicle = (vehicle) => {
+    setEditing(true);
+
+    setCurrentVehicle({
+      id: vehicle.id,
+      maker: vehicle.maker,
+      model: vehicle.model,
+      year: vehicle.year,
+      owner: vehicle.owner,
+      malfunction: vehicle.malfunction,
+    });
+  };
+
+  const updateVehicle = (id, updatedVehicle) => {
+    setEditing(false);
+
+    setVehicles(
+      vehicles.map((vehicle) => (vehicle.id === id ? updatedVehicle : vehicle))
+    );
+  };
+
   const addVehicle = (vehicle) => {
     vehicle.id = vehicles.length + 1;
     setVehicles([...vehicles, vehicle]);
@@ -49,12 +84,29 @@ const App = () => {
       <h1>Auto repair shop</h1>
       <div className="flex-row">
         <div className="flex-large">
-          <h2>Add vehicle</h2>
-          <AddVehicleForm addVehicle={addVehicle} />
+          {editing ? (
+            <div>
+              <h2>Edit vehicle</h2>
+              <EditVehicleForm
+                setEditing={setEditing}
+                currentVehicle={currentVehicle}
+                updateVehicle={updateVehicle}
+              />
+            </div>
+          ) : (
+            <div>
+              <h2>Add vehicle</h2>
+              <AddVehicleForm addVehicle={addVehicle} />
+            </div>
+          )}
         </div>
         <div className="flex-large">
           <h2>Vehicle queue</h2>
-          <CarTable vehicles={vehicles} deleteVehicle={deleteVehicle} />
+          <CarTable
+            vehicles={vehicles}
+            editVehicle={editVehicle}
+            deleteVehicle={deleteVehicle}
+          />
         </div>
       </div>
     </div>
