@@ -15,6 +15,7 @@ const CarTable = (props) => (
         <th>Model</th>
         <th>Year of production</th>
         <th>Owner name</th>
+        <th>Malfunction</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -26,7 +27,8 @@ const CarTable = (props) => (
             <td>{vehicle.model}</td>
             <td>{vehicle.year}</td>
             <td>{vehicle.owner}</td>
-            <td>
+            <td>{vehicle.malfunction}</td>
+            <td id="actions">
               <IconButton color="primary">
                 <EditIcon />
               </IconButton>

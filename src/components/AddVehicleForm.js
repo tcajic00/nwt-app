@@ -11,6 +11,7 @@ const AddVehicleForm = (props) => {
     model: "",
     year: "",
     owner: "",
+    malfunction: "",
   };
   const [vehicle, setVehicle] = useState(initialFormState);
 
@@ -25,7 +26,13 @@ const AddVehicleForm = (props) => {
       id="add-form"
       onSubmit={(event) => {
         event.preventDefault();
-        if (!vehicle.maker || !vehicle.model || !vehicle.year || !vehicle.owner)
+        if (
+          !vehicle.maker ||
+          !vehicle.model ||
+          !vehicle.year ||
+          !vehicle.owner ||
+          !vehicle.malfunction
+        )
           return;
 
         props.addVehicle(vehicle);
@@ -65,6 +72,15 @@ const AddVehicleForm = (props) => {
         name="owner"
         value={vehicle.owner}
         label="Owner"
+        variant="outlined"
+        onChange={handleInputChange}
+      />
+      <TextField
+        required
+        type="text"
+        name="malfunction"
+        value={vehicle.malfunction}
+        label="Malfunction"
         variant="outlined"
         onChange={handleInputChange}
       />
