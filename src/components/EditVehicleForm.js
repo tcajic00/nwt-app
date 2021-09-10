@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { TextField, Button } from "@material-ui/core";
 
-import "./add-vehicle-form.css";
+import "./edit-vehicle-form.css";
 
-const AddVehicleForm = (props) => {
-  const initialFormState = {
-    id: null,
-    maker: "",
-    model: "",
-    year: "",
-    owner: "",
-    malfunction: "",
-  };
-  const [vehicle, setVehicle] = useState(initialFormState);
+const EditVehicleForm = (props) => {
+  const [vehicle, setVehicle] = useState(props.currentVehicle);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -21,22 +13,16 @@ const AddVehicleForm = (props) => {
     setVehicle({ ...vehicle, [name]: value });
   };
 
+  useEffect(() => {
+    setVehicle(props.currentVehicle);
+  }, [props]);
+
   return (
     <form
-      id="add-form"
+      id="edit-form"
       onSubmit={(event) => {
         event.preventDefault();
-        if (
-          !vehicle.maker ||
-          !vehicle.model ||
-          !vehicle.year ||
-          !vehicle.owner ||
-          !vehicle.malfunction
-        )
-          return;
-
-        props.addVehicle(vehicle);
-        setVehicle(initialFormState);
+        props.updateVehicle(vehicle.id, vehicle);
       }}
     >
       <TextField
@@ -85,10 +71,17 @@ const AddVehicleForm = (props) => {
         onChange={handleInputChange}
       />
       <Button color="primary" variant="contained" type="submit">
-        Add vehicle
+        Update vehicle
+      </Button>
+      <Button
+        onClick={() => props.setEditing(false)}
+        variant="contained"
+        color="secondary"
+      >
+        Cancel
       </Button>
     </form>
   );
 };
 
-export default AddVehicleForm;
+export default EditVehicleForm;

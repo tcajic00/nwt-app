@@ -1,7 +1,7 @@
-#add-form {
+#edit-form {
   display: flex;
   flex-direction: column;
-  min-height: 25rem;
+  min-height: 27rem;
   justify-content: space-between;
   width: 17rem;
 }
