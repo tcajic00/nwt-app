@@ -33,6 +33,7 @@ const AddVehicleForm = (props) => {
       }}
     >
       <TextField
+        required
         type="text"
         name="maker"
         value={vehicle.maker}
@@ -41,6 +42,7 @@ const AddVehicleForm = (props) => {
         onChange={handleInputChange}
       />
       <TextField
+        required
         type="text"
         name="model"
         value={vehicle.model}
@@ -49,6 +51,7 @@ const AddVehicleForm = (props) => {
         onChange={handleInputChange}
       />
       <TextField
+        required
         type="text"
         name="year"
         value={vehicle.year}
@@ -57,6 +60,7 @@ const AddVehicleForm = (props) => {
         onChange={handleInputChange}
       />
       <TextField
+        required
         type="text"
         name="owner"
         value={vehicle.owner}
