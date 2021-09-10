@@ -1,6 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import './App.css';
+import CarTable from "../src/components/CarTable";
+
+import "./App.css";
 
 function App() {
   return (
@@ -12,10 +14,11 @@ function App() {
         </div>
         <div className="flex-large" id="title-2">
           <h2>Vehicle queue</h2>
+          <CarTable />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default App;
