@@ -9,8 +9,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  width: 100%;
-  justify-content: center;
 }
 
 .flex-large {
@@ -19,4 +17,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.logged-user {
+  align-self: flex-end;
+}
+
+.build-icon {
+  margin-right: 2rem;
+  color: darkblue;
 }
