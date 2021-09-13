@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 import "./login.css";
 
@@ -20,6 +21,13 @@ const LoginPage = (props) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value, loggedIn: true });
   };
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const handleError = (message) => {
+    enqueueSnackbar(message, { variant: "error" });
+  };
+
   return (
     <div className="login-body">
       <h2>AUTO REPAIR SHOP</h2>
@@ -30,23 +38,23 @@ const LoginPage = (props) => {
           event.preventDefault();
           if (!props.allUsers) return;
           const list = props.allUsers;
-          for (let i = 0; i < list.length; i++) {
+          if (list.some((u) => u.username === user.username)) {
             if (
-              list[i].username === user.username &&
-              list[i].password === user.password
+              list.some(
+                (u) =>
+                  u.password === user.password && u.username === user.username
+              )
             ) {
-              if (list[i].admin === true) {
+              if (user.username === "tcajic00") {
                 user.admin = true;
-                console.log(user);
-                props.handleLogin(user);
-                history.push("/");
               }
               props.handleLogin(user);
               history.push("/");
             } else {
-              setUser(initial);
-              console.log("No such user");
+              handleError("Wrong password!");
             }
+          } else {
+            handleError("No such user!");
           }
         }}
       >

@@ -16,7 +16,7 @@ const CarTable = (props) => (
         <th>Year of production</th>
         <th>Owner name</th>
         <th>Malfunction</th>
-        {props.logged.username === "tcajic00" ? <th>Actions</th> : <div />}
+        {props.logged.admin === true ? <th>Actions</th> : <div />}
       </tr>
     </thead>
     <tbody id="table-body">
@@ -28,7 +28,7 @@ const CarTable = (props) => (
             <td>{vehicle.year}</td>
             <td>{vehicle.owner}</td>
             <td>{vehicle.malfunction}</td>
-            {props.logged.username === "tcajic00" ? (
+            {props.logged.admin === true ? (
               <td id="actions">
                 <IconButton
                   color="primary"

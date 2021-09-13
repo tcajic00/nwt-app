@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useState } from "react";
 
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -6,6 +6,9 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./App.css";
+import { SnackbarProvider } from "notistack";
+
+const notistackRef = createRef();
 
 const allUsers = [
   {
@@ -52,7 +55,17 @@ const App = () => {
         <Route
           path="/login"
           render={() => (
-            <LoginPage handleLogin={handleLogin} allUsers={allUsers} />
+            <SnackbarProvider
+              maxSnack={1}
+              ref={notistackRef}
+              onClose={(event, reason, key) => {
+                if (reason === "clickaway") {
+                  notistackRef.current.closeSnackbar(key);
+                }
+              }}
+            >
+              <LoginPage handleLogin={handleLogin} allUsers={allUsers} />
+            </SnackbarProvider>
           )}
         />
         <Route path="/register" />
