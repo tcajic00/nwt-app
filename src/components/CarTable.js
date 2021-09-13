@@ -16,7 +16,7 @@ const CarTable = (props) => (
         <th>Year of production</th>
         <th>Owner name</th>
         <th>Malfunction</th>
-        <th>Actions</th>
+        {props.logged.admin === true ? <th>Actions</th> : <div />}
       </tr>
     </thead>
     <tbody id="table-body">
@@ -28,22 +28,26 @@ const CarTable = (props) => (
             <td>{vehicle.year}</td>
             <td>{vehicle.owner}</td>
             <td>{vehicle.malfunction}</td>
-            <td id="actions">
-              <IconButton
-                color="primary"
-                onClick={() => {
-                  props.editVehicle(vehicle);
-                }}
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton
-                color="secondary"
-                onClick={() => props.deleteVehicle(vehicle.id)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </td>
+            {props.logged.admin === true ? (
+              <td id="actions">
+                <IconButton
+                  color="primary"
+                  onClick={() => {
+                    props.editVehicle(vehicle);
+                  }}
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  color="secondary"
+                  onClick={() => props.deleteVehicle(vehicle.id)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </td>
+            ) : (
+              <div />
+            )}
           </tr>
         ))
       ) : (
