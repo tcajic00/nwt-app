@@ -7,14 +7,9 @@ import "./login.css";
 const LoginPage = (props) => {
   const initial = {
     username: "",
-    loggedIn: false,
     password: "",
-  };
-
-  const admin = {
-    username: "tcajic00",
-    loggedIn: true,
-    password: "12345",
+    admin: false,
+    loggedIn: false,
   };
 
   const [user, setUser] = useState(initial);
@@ -33,10 +28,26 @@ const LoginPage = (props) => {
         id="login-form"
         onSubmit={(event) => {
           event.preventDefault();
-          if (!user.username || !user.password) return;
-          props.handleLogin(user);
-
-          history.push("/");
+          if (!props.allUsers) return;
+          const list = props.allUsers;
+          for (let i = 0; i < list.length; i++) {
+            if (
+              list[i].username === user.username &&
+              list[i].password === user.password
+            ) {
+              if (list[i].admin === true) {
+                user.admin = true;
+                console.log(user);
+                props.handleLogin(user);
+                history.push("/");
+              }
+              props.handleLogin(user);
+              history.push("/");
+            } else {
+              setUser(initial);
+              console.log("No such user");
+            }
+          }
         }}
       >
         <TextField

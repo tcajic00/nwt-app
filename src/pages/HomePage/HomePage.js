@@ -95,7 +95,7 @@ const HomePage = (props) => {
 
       {props.logged.loggedIn ? (
         <div className="flex-row">
-          {props.logged.username === "tcajic00" ? (
+          {props.logged.admin === true ? (
             <div className="flex-large">
               {editing ? (
                 <div>
